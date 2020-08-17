@@ -6,11 +6,6 @@ screenWidth, screenHeight = pyautogui.size() # Get the size of the primary monit
 currentMouseX, currentMouseY = pyautogui.position() # Get the XY position of the mouse.
 
 town = False
-
-def npc_conversation():
-    time.sleep(.5)
-    pyautogui.press('enter')
-    
     
 def warp(yourwarp):
     pyautogui.press('enter')
