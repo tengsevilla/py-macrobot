@@ -38,12 +38,16 @@ def storeall():
         command('@storeall id '+ item)
         
 tick = 0
+bop_tick = 0
+bop_is_full = 36
 # 00 Modify to your liking
-ALOOTID_ITEM_ID = '12034'
+ALOOTID_ITEM_ID = '12034 1015 969 985 984 7321 7312 604' #963 12053 971 1053 631 Clam Soup
 AFK_AFTER_SKILL_COUNT = 600   # After N' times casted, go back in desired town
-AFK_IN_TOWN_DURATION = 20 # In seconds
-ALT_M_WARP_KEY = '3'
+AFK_IN_TOWN_DURATION = 10 # In seconds
+ALT_M_WARP_KEY_1 = '2'
+ALT_M_WARP_KEY_2 = '3'
 STORM_GUST_KEY = 'e'
+VERMILLION_KEY = 'w'
 # 00 Until here 
 
 print('START!!!! added 5 sec delay please redirect to your game client\n')
@@ -52,8 +56,9 @@ print('1. Close all applications, only the client is running')
 print('2. Turn off your wireless mouse / unplug it')
 print('3. Please dont repeat your mistake that almost got us banned')
 
-time.sleep(5)
+time.sleep(6)
 command('@alootid '+ ALOOTID_ITEM_ID)
+command('@autoloot 10 ')
 while True:
     if(tick >= AFK_AFTER_SKILL_COUNT):
         if(town == False):
@@ -70,17 +75,29 @@ while True:
         if(tick >= tick_merge):
             tick = 0
             town = False;
+            bop_tick = bop_tick + 1;
+            print('Bop tick')
+            print(str(bop_tick))
 
         #Normalize sleep
         time.sleep(1)
             
     else:
+        modulo = bop_tick % 2
+
+        if(modulo == 0):
+            pyautogui.keyDown('altleft')
+            pyautogui.press(ALT_M_WARP_KEY_1)
+            pyautogui.keyUp('altleft')
+            time.sleep(.1)
+            pyautogui.press(STORM_GUST_KEY)
+        else:
+            pyautogui.keyDown('altleft')
+            pyautogui.press(ALT_M_WARP_KEY_2) #Second warp 
+            pyautogui.keyUp('altleft')
+            time.sleep(.1)
+            pyautogui.press(STORM_GUST_KEY)
         
-        pyautogui.keyDown('altleft')
-        pyautogui.press(ALT_M_WARP_KEY)
-        pyautogui.keyUp('altleft')
-        time.sleep(.1)
-        pyautogui.press(STORM_GUST_KEY)
         pyautogui.click()
         
         
