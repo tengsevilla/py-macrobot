@@ -41,8 +41,9 @@ tick = 0
 warp_seq = 1
 # 00 Modify to your liking
 ALOOTID_ITEM_ID = '12034 1015 969 985 7321 7312 1055' #984 ori #963 12053 971 1053 631 Clam Soup
-AFK_AFTER_SKILL_COUNT = 600   # After N' times casted, go back in desired town
-AFK_IN_TOWN_DURATION = 5 # In seconds
+ALTM_WARP_UPTO_KEY_NUM = 4      # Sequence should be incremental. Alt 1, Alt 2, Alt 3
+AFK_AFTER_SKILL_COUNT = 600     # After N' times casted, go back in desired town
+AFK_IN_TOWN_DURATION = 5        # In seconds
 STORM_GUST_KEY = 'e'
 VERMILLION_KEY = 'w'
 # 00 Until here 
@@ -80,8 +81,8 @@ while True:
         time.sleep(1)
             
     else:
-        if(warp_seq > 4):
-            warp_seq = 1
+        if(warp_seq > ALTM_WARP_UPTO_KEY_NUM):
+            warp_seq = 1 #Reset
             
         pyautogui.keyDown('altleft')
         pyautogui.press(warp_seq) #Second warp 
