@@ -9,14 +9,14 @@ town = False
     
 def warp(yourwarp):
     pyautogui.press('enter')
-    pyautogui.write(yourwarp, interval=0.03)
+    pyautogui.write(yourwarp, interval=0.05)
     pyautogui.press('enter')
     pyautogui.press('enter')
     time.sleep(3)
 
 def command(param1):
     pyautogui.press('enter')
-    pyautogui.write(param1, interval=0.03)
+    pyautogui.write(param1, interval=0.1)
     pyautogui.press('enter')
     pyautogui.press('enter')
     time.sleep(.5)
@@ -38,12 +38,14 @@ def storeall():
         command('@storeall id '+ item)
         
 tick = 0
-warp_seq = 1
+bop_tick = 0
+bop_is_full = 36
 # 00 Modify to your liking
-ALOOTID_ITEM_ID = '12034 678 12114 12115 12116 12117 607 608 971 969'
-ALTM_WARP_UPTO_KEY_NUM = 7      # Sequence should be incremental. Alt 1, Alt 2, Alt 3
-AFK_AFTER_SKILL_COUNT = 500     # After N' times casted, go back in desired town
-AFK_IN_TOWN_DURATION = 5        # In seconds
+ALOOTID_ITEM_ID = '12034 969 12114 12115 12116 12117 678'
+AFK_AFTER_SKILL_COUNT = 600   # After N' times casted, go back in desired town
+AFK_IN_TOWN_DURATION = 5 # In seconds
+ALT_M_WARP_KEY_1 = '2'
+ALT_M_WARP_KEY_2 = '3'
 STORM_GUST_KEY = 'e'
 VERMILLION_KEY = 'w'
 # 00 Until here 
@@ -56,7 +58,7 @@ print('3. Please dont repeat your mistake that almost got us banned')
 
 time.sleep(6)
 command('@alootid '+ ALOOTID_ITEM_ID)
-#command('@autoloot 10 ')
+command('@autoloot 10 ')
 while True:
     if(tick >= AFK_AFTER_SKILL_COUNT):
         if(town == False):
@@ -73,27 +75,39 @@ while True:
         if(tick >= tick_merge):
             tick = 0
             town = False;
-            warp_seq = warp_seq + 1;
-            #print('Bop tick')
-            print(str(warp_seq))
+            bop_tick = bop_tick + 1;
+            print('Bop tick')
+            print(str(bop_tick))
 
         #Normalize sleep
         time.sleep(1)
             
     else:
-        if(warp_seq > ALTM_WARP_UPTO_KEY_NUM):
-            warp_seq = 1 #Reset
+        modulo = bop_tick % 2
+
+        if(modulo == 0):
             
-        pyautogui.keyDown('altleft')
-        pyautogui.press(str(warp_seq)) #Second warp 
-        pyautogui.keyUp('altleft')
-        time.sleep(.1)
-        pyautogui.press(STORM_GUST_KEY)
+            pyautogui.keyDown('altleft')
+            if(modulo == 0):
+                pyautogui.press(ALT_M_WARP_KEY_1)
+            else:
+                pyautogui.press(ALT_M_WARP_KEY_2)
+            pyautogui.keyUp('altleft')
+            time.sleep(.1)
+            pyautogui.press(STORM_GUST_KEY)
+
+        else:
+            pyautogui.keyDown('altleft')
+            pyautogui.press(ALT_M_WARP_KEY_2) #Second warp 
+            pyautogui.keyUp('altleft')
+            time.sleep(.1)
+            pyautogui.press(STORM_GUST_KEY)
+        
         pyautogui.click()
         
         
     tick = tick + 1
-    #print(tick)
+    print(tick)
     
 
 
