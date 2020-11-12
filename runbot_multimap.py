@@ -40,8 +40,8 @@ def storeall():
 tick = 0
 warp_seq = 1
 # 00 Modify to your liking
-ALOOTID_ITEM_ID = '12034 678 12114 12115 12116 12117 607 608 971 969'
-ALTM_WARP_UPTO_KEY_NUM = 7      # Sequence should be incremental. Alt 1, Alt 2, Alt 3
+ALOOTID_ITEM_ID = '12034 678 12114 12115 12116 12117 607 608 969 7444'
+ALTM_WARP_UPTO_KEY_NUM = 4      # Sequence should be incremental. Alt 1, Alt 2, Alt 3
 AFK_AFTER_SKILL_COUNT = 500     # After N' times casted, go back in desired town
 AFK_IN_TOWN_DURATION = 5        # In seconds
 STORM_GUST_KEY = 'e'
@@ -85,15 +85,22 @@ while True:
             warp_seq = 1 #Reset
             
         pyautogui.keyDown('altleft')
-        pyautogui.press(str(warp_seq)) #Second warp 
+        pyautogui.press(str(warp_seq)) 
         pyautogui.keyUp('altleft')
-        time.sleep(.1)
+        time.sleep(.2)
         pyautogui.press(STORM_GUST_KEY)
         pyautogui.click()
+
+        # If need to cast LOV in the map, please add the alt M here.
+        if(warp_seq == 0):
+            time.sleep(.7)
+            pyautogui.press(VERMILLION_KEY)
+            pyautogui.click()
         
         
     tick = tick + 1
     #print(tick)
+    
     
 
 
