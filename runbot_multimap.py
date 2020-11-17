@@ -41,11 +41,11 @@ tick = 0
 warp_seq = 1
 # 00 Modify to your liking
 ALOOTID_ITEM_ID = '12034 678 12114 12115 12116 12117 607 608 969 7444'
-ALTM_WARP_UPTO_KEY_NUM = 4      # Sequence should be incremental. Alt 1, Alt 2, Alt 3
+ALTM_WARP_UPTO_KEY_NUM = 3      # Sequence should be incremental. Alt 1, Alt 2, Alt 3
 AFK_AFTER_SKILL_COUNT = 500     # After N' times casted, go back in desired town
 AFK_IN_TOWN_DURATION = 5        # In seconds
-STORM_GUST_KEY = 'e'
-VERMILLION_KEY = 'w'
+STORM_GUST_KEY = '2'
+VERMILLION_KEY = '1'
 # 00 Until here 
 
 print('START!!!! added 5 sec delay please redirect to your game client\n')
@@ -92,7 +92,7 @@ while True:
         pyautogui.click()
 
         # If need to cast LOV in the map, please add the alt M here.
-        if(warp_seq == 0):
+        if(warp_seq == 66):
             time.sleep(.7)
             pyautogui.press(VERMILLION_KEY)
             pyautogui.click()

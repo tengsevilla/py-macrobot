@@ -13,6 +13,7 @@ yMax = screenHeight / 2 + ((screenHeight / 2) / 2)
 
 #pyautogui.moveTo(icon, duration=.5)
 joining_bg = False
+status = 'waiting';
 print('START!!!! added 5 sec delay please redirect to your game client\n')
 print('Reminder of the following')
 print('1. Close all applications, only the client is running')
@@ -55,22 +56,46 @@ def command(param1):
 
 
 while True:
-    print('joining_bg:', joining_bg)
+    print('Status: ', status)
     npc_exist = check_npc_icon()
-    if(npc_exist == True and joining_bg == False):
-        join_bg()
-        joining_bg = True
-    elif(npc_exist == False and joining_bg == True):
+
+    if(status == 'waiting'):
+        if(npc_exist == True):
+            join_bg()
+            status = 'joining'
+
+    if(status == 'joining'):
+        if(npc_exist == False):
+            status = 'onbg'
+           
+
+    if(status == 'onbg'):
         randX = random.randint(xMin, xMax)
         randY = random.randint(yMin, yMax)
-        onbg_npc = check_npc_icon()
-        #Walk
-        pyautogui.click(x=randX, y=randY, clicks=1, interval=1, button='left')
+        
         #TODO: Skill sequence
-        if(onbg_npc == True):
-            joining_bg = False
-            npc_exist = false
-            time.sleep(5) #Add delay when BG is done
+
+        if(npc_exist == True):
+            time.sleep(5)
+            status = 'waiting'
+        else:
+            #Walk
+            pyautogui.click(x=randX, y=randY, clicks=1, interval=.2, button='left')
+            time.sleep(3)
+        
+
+    #if(npc_exist == True):
+     #   if(joining_bg == False):
+    #        join_bg()
+    #        joining_bg = True
+    #    else:
+    #        joining_bg = False
+            
+
+    #if(npc_exist == False):
+     #   if(joining_bg == True):
+            
+            
         
         
         
