@@ -46,6 +46,22 @@ def check_npc_icon():
 
     return ret
 
+def perform_action():
+    randA = random.randint(1, 9)
+    randB = random.randint(1, 9)
+
+    if(randA == randB):
+        #Cast a skill
+        print('Cast a skill:', randA)
+        pyautogui.press(randA)
+        pyautogui.click()
+        
+    ans = randA - randB
+    if(ans == 0):
+        #Send emote
+        print('Send emote')
+        command('/heh')
+
 #Common function
 def command(param1):
     pyautogui.press('enter')
@@ -70,31 +86,21 @@ while True:
            
 
     if(status == 'onbg'):
+        time.sleep(3)
         randX = random.randint(xMin, xMax)
         randY = random.randint(yMin, yMax)
-        
+        rand_click = random.randint(1, 4)
         #TODO: Skill sequence
 
-        if(npc_exist == True):
-            time.sleep(5)
+        if(check_npc_icon() == True):
             status = 'waiting'
+            time.sleep(5)
         else:
+            perform_action()
             #Walk
-            pyautogui.click(x=randX, y=randY, clicks=1, interval=.2, button='left')
-            time.sleep(3)
+            pyautogui.click(x=randX, y=randY, clicks=rand_click, interval=.2, button='left')
+            
         
-
-    #if(npc_exist == True):
-     #   if(joining_bg == False):
-    #        join_bg()
-    #        joining_bg = True
-    #    else:
-    #        joining_bg = False
-            
-
-    #if(npc_exist == False):
-     #   if(joining_bg == True):
-            
             
         
         
